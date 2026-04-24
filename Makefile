@@ -6,8 +6,8 @@ INCLUDE_FILES=a5.h bits.h gea.h gprs_cipher.h kasumi.h linuxlist.h utils.h
 
 # build A5/3 library
 liba53.so.1.0: ${SOURCE_FILES} ${INCLUDE_FILES} Makefile
-	g++ -O3 -Wall -fPIC -c ${SOURCE_FILES}
-	g++ -shared -Wl,-soname,liba53.so.1 -o liba53.so.1.0 ${OBJECT_FILES}
+	$(CXX) -O3 -Wall -fPIC -c ${SOURCE_FILES}
+	$(CXX) -shared -Wl,-soname,liba53.so.1 -o liba53.so.1.0 ${OBJECT_FILES}
 	ln -sf liba53.so.1.0 liba53.so.1
 	ln -sf liba53.so.1.0 liba53.so
 
@@ -20,7 +20,7 @@ install: liba53.so.1.0
 
 # test installed A5/3 library
 installtest: install
-	g++ -o a53test a53test.cpp -I$(DESTDIR)/usr/include -L$(DESTDIR)/usr/lib -la53
+	$(CXX) -o a53test a53test.cpp -I$(DESTDIR)/usr/include -L$(DESTDIR)/usr/lib -la53
 	./a53test
 
 clean:
